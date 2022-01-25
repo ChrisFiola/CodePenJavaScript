@@ -1,5 +1,5 @@
 # codePen_P2CH2JS
-Learning Javascript with openclassroom, an example of a page structure
+Learning Javascript with openclassroom.
 
 To view html page on the browser:
 
