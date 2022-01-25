@@ -2,17 +2,26 @@ class Episode {
   constructor(title, duration, minutesWatched) {
     this.title = title;
     this.duration = duration;
+    // Add logic here
+    // ======================
     
-    // Add conditions here
-    // =================================
-    if (minutesWatched === duration) {
-      this.hasBeenWatched = true;
-    } else {
-      this.hasBeenWatched = false;
+    this.continueWatching = false;
+    
+    if (minutesWatched === duration){
+      this.watchedText = 'Watched';
     }
-    // =================================
+    else if (minutesWatched < duration && minutesWatched > 0){
+      this.watchedText = 'Watching';
+      this.continueWatching = true;
+    }
+    else{
+      this.watchedText = 'Not yet watched';
+    }
+    
+    
+    // ======================
   }
-} 
+}
 
 let firstEpisode = new Episode('Dark Beginnings', 45, 45);
 let secondEpisode = new Episode('The Mystery Continues', 45, 10);
@@ -22,7 +31,7 @@ let episodes = [firstEpisode, secondEpisode, thirdEpisode];
 
 const body = document.querySelector('body');
 
-for(let i = 0; i < 3; i++) {
+for(let i = 0; i < 12; i++) {
   let newDiv = document.createElement('div');
   newDiv.classList.add('series-frame');
   let newTitle = document.createElement('h2');
@@ -30,8 +39,14 @@ for(let i = 0; i < 3; i++) {
   let newParagraph = document.createElement('p');
   newParagraph.innerText = `${episodes[i].title}
 ${episodes[i].duration} minutes
-${episodes[i].hasBeenWatched ? 'Already been watched' : 'Not yet watched'}`;
+${episodes[i].watchedText}
+`;
   newDiv.append(newTitle);
   newDiv.append(newParagraph);
+  if (episodes[i].continueWatching) {
+    let newButton = document.createElement('button');
+    newButton.innerText = 'Continue watching';
+    newParagraph.append(newButton);
+  }
   body.append(newDiv);
 }
